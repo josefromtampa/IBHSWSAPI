@@ -1,4 +1,4 @@
-# IBHSWSAPI 
+# IBHS Web Services API
 IBHS Web Services API for accessing various features of Focus.
 
 ## IBHS Web Service API (Rest/JSON)
