@@ -38,6 +38,90 @@ The main models around the Focus Platform:
   - Questions
   - Answsers
   - Attachments
+  
+Note: Any evaluation can be accessed by it's unique Fortified Id number (string).
+
+All responses include a **expiration date** of the Security Token along with an array of any **errors[]** encountered.
+
+### Creating an Evaluation
+The web service has a CreateEvaluation operation that can be called with the appropriate JSON data. 
+  This operation does require a unique street/city/state along with Home Owner inforamtion.  
+  In order for the evaluation to be seen by a specific evaluator, an evaluator Id must be used in the **request.application.EvaluatorId** field. If an invalid evaluator Id is used, the evaluation will be parked in a temporary area and can still be claimed by any evaluator -- but must have the Fortified Id in order to claim.  (The process of claiming in currently only available in the IBHS Focus application).
+
+This operation, when successful, will return the key identifier the evaluation -- the Fortified Id.  Please see Postman for examples.
+
+### Updating an Evaluation
+The web service can perform an update to an evaluation.  Much like the CreateEvaluation, it uses the same data model, but includes a necessary FortifiedId field for identifing the evaluation.
+
+Not all sections need to be included in the update -- only section that have changed.  Any answer that is null or whose answer is 0 (and should be, like DesignationTypeId) will not be replaced.
+
+### Retrieving an Evaluation
+The web service can retrieve the information associated with a given FID and will tyically include additional data in the response:
+Example:
+```
+{
+  "propertyDetails": {
+    "Latitude": "-40.498",
+    "Longitude": "82.2323",
+    "BuilderName": "Mr. Builder",
+    "HomeCategoryId": 1,
+    "Remodeled": true,
+    "RemodeledDescription": "New Attached Structure",
+    "YearBuilt": 2014,
+    "RoofAge": 4,
+    "NewRoof": true
+  },
+  "propertyAddress": {
+    "Address1": "12101 Beach Dr.",
+    "Address2": "",
+    "City": "Tampa",
+    "StateAbbr": "FL",
+    "ZipCode": "33611"
+  },
+  "mailingAddress": {
+    "Address1": "3210 First St.",
+    "Address2": "",
+    "City": "Tampa",
+    "StateAbbr": "GA",
+    "ZipCode": "33612"
+  },
+  "homeOwner": {
+    "Salutation": "Mr.",
+    "Email": "sample@email.com",
+    "FirstName": "John",
+    "LastName": "Smith",
+    "Phone": "1212324343"
+  },
+  "application": {
+    "DesignationTypeId": 1,
+    "HomeProgramTypeId": 1,
+    "ProjectLabel": "NCIUA",
+    "EvaluationDate": "2019-01-14T23:43:24.427",
+    "EvaluatorId": 14
+  },
+  "EvaluationId": 33099,
+  "FortifiedId": "FEH3361120190D2DE44",
+  "HomeCategoryId": 1,
+  "HomeCategory": "New Construction",
+  "HomeProgramTypeId": 1,
+  "HomeProgram": "FORTIFIED Home:Hurricane",
+  "DesignationTypeId": 1,
+  "Designation": "FORTIFIED Bronze",
+  "Status": "Evaluation In Progress",
+  "StatusId": 8,
+  "EvaluatorId": 14,
+  "Evaluator_Firstname": "Jose",
+  "Evaluator_LastName": "Jimenez",
+  "EvaluationExpireDate": null,
+  "CreatedDate": "2019-02-03T21:14:19.207",
+  "ModifiedDate": null,
+  "DateSubmit_Started": null,
+  "DateSubmit_Ended_AuditBegins": null,
+  "Date_Designated": null,
+  "Errors": [],
+  "SecurityTokenInvalidAfter": "2019-02-09T00:00:00"
+}
+```
 
 ### Understanding Focus Collections
 
@@ -166,6 +250,7 @@ For example, question 189's DependendShowData consist of the following:
   -"MultiOccuranceQuestionGroup": null,
 
 In this example, show all questions where MutliOccuranceQuestionGroup="OffRidge".
+NOTE: When answering Multi-Occurance questions, use the answer's "AnswerSequence" to distinguish betweeneach set of question/answers.  The AnswerSequence always start with 1 for all questions (never 0), and goes up 1 for each occurance of a group of question/answers.
 
 #### Understanding Question Reponses
 If a question requires a specific answer from, say, a drop-down or Yes/No, True/False, etc., the possible values for a given question Id are available via two different service calls:
@@ -177,7 +262,86 @@ A separate call is available for situations where it's more feasible to go after
 
 
 ### Understanding Answers
-#### Type: Is a specific response required?
-#### Answer Model: Question ID, Answer Response, Answer Sequence
-### Understand Answer Attachments
+Answer structures from the service are based on important linking information.  These include the Question Id, Answer and Answer Sequence.
 
+It is not necessary to know whether an answer already exists for a given evaluation.  The web service performs an UPSERT (Insert/Update) operation for answers: if the answer doesn't exist, it is created and value set. If it does exist, the values is simply updated.
+
+#### Answer Model: Question ID, Answer Response, Answer Sequence
+The web service returns all answers for a given evaluation (in the for of the Fortified Id).
+
+Example:
+```
+"Answers": [
+    {
+      "QuestionId": 2,
+      "AnswerSequence": 1,
+      "Question": "Dwelling Type",
+      "Answer": "Single"
+    },
+    {
+      "QuestionId": 3,
+      "AnswerSequence": 1,
+      "Question": "Exposure Category",
+      "Answer": "C"
+    },
+    {
+      "QuestionId": 4,
+      "AnswerSequence": 1,
+      "Question": "Year Built",
+      "Answer": "2018"
+    },
+    {
+      "QuestionId": 5,
+      "AnswerSequence": 1,
+      "Question": "How was year built determined?",
+      "Answer": "Construction Observation by Evaluator"
+    },
+    {
+      "QuestionId": 11,
+      "AnswerSequence": 1,
+      "Question": "Does home have gables?",
+      "Answer": "No"
+    },
+    {
+      "QuestionId": 12,
+      "AnswerSequence": 1,
+      "Question": "Does home have garage doors?",
+      "Answer": "Yes"
+    },
+    {
+      "QuestionId": 13,
+      "AnswerSequence": 1,
+      "Question": "Does home have a chimney?",
+      "Answer": "No"
+    },
+    {
+      "QuestionId": 14,
+      "AnswerSequence": 1,
+      "Question": "Is structure supported by dry stack or unreinforced foundation?",
+      "Answer": "No"
+    },
+```
+
+
+### Understand Answer Attachments
+[This section is under design considerations and could change at any time]
+Much like Answers, attachments are associated to a Fortified Id and can be retrieved, upserted and deleted.  But, unlike Answers, Attachments require resources to be available within the IBHS system indpendently.
+To accomplish this, the Attachment structure contains an ImportUrl used for the web services to pull the resource into the IBHS system.  Once the system imports the URL, the attachment's name will be updated:
+
+```
+  "AnswerAttachments": [
+    {
+      "QuestionId": 97,
+      "Question": "If access is Partial or None, describe what restricts access? (Type n/a, if not applicable)",
+      "AnswerSequence": 1,
+      "AttachmentSequence": 2,
+      "AttachmentName": "",
+      "AttachmentComment": null,
+      "AttachmentImportUrl": "https://someserver.com/somedir/someimage.png",
+      "AttachmentUrl": "https://IBHSServer.com/ibhs_uploads/FEH336112019036CE51/images/"
+    }
+```
+Attachments require a Question Id, AnswerSequence and Attachment Sequence.  The AttachmentUrl is used for importing an image.
+
+#### Images in the payload:
+It is possible to support transporting base64 byte arrays as a field whereas the web service would transform the byte array into an image or document.  It's important to know that there is a limit to the amount of data transfered in HTTP Post requests and, because of this, would be advised to only provide individual attachment uploads and avoid bulk attachment uploads when the images are in the request's payload.
