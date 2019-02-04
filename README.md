@@ -46,7 +46,7 @@ The IBHS Web services allow for the retrieval of all defined collections along w
 
 ### Understanding Questions
 Each evaluation contains a collection of answers to questions.  The list of all questions (for a given program type) can be retrieved via the web service, as well as a single questions (given a progam type and question Id).  The question have serveral characteristics that are important to note.
-#### Questions: When to show
+
 The service, when all questions are retrieved, will show a complete and full set of all questions.  It's important to note that:
 ```
    {  "SectionTypeId": 1,
@@ -74,7 +74,7 @@ Questions include attributes (that don't change):
   -"QuestionCode": permenant question code
   -"QuestionTypeId": Type of input for the question (see Collections section for EvalQuestionType [4=Number]).
   
-#### Questions: When to use dependentShowData
+#### Questions: When to show, sort order and attachment requirements
 If this flag=true, then the question is included in this Program Type (homeProgramTypeId).  This value does not change for the given program type under any conditions:
 
   -"Include": true,
@@ -93,7 +93,8 @@ Questions could have an image/document requirement.  When both Min and Max are 0
 
   -"MinAttachments": 0,
   -"MaxAttachments": 0,
-
+  
+#### Questions: When to use dependentShowData
 Question where [MemberOfDependentShowGroup == null] can be shown, while those that have a value in this field are "Conditionally Rendered".  Typically, another question's answer will trigger for all questions with a particular MemberOfDependentShowGroup name to appear.
 
   -"MemberOfDependentShowGroup": null
