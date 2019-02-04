@@ -126,12 +126,12 @@ Example:
   "SecurityTokenInvalidAfter": "2019-02-09T00:00:00"
 }
 ```
-See Postman [Updating an Evaluation](https://documenter.getpostman.com/view/9267/RztmsUpJ#794497f9-a594-4e81-a3fa-e218ec1a6323) for examples.
+See Postman [Retrieving an Evaluation](https://documenter.getpostman.com/view/9267/RztmsUpJ#794497f9-a594-4e81-a3fa-e218ec1a6323) for examples.
 
 ### Understanding Focus Collections
 
 The Focus system uses collections to define specific attributes such as HomeProgramType (Hurricane, High Wind), HomeCateogryType (New Home, Existing Home), DesignationTypes (Gold, Silver, Bronze), etc.  
-The IBHS Web services allow for the retrieval of all defined collections along with the retrieval of the key/values associated with each collection (view [Postman Documention](https://documenter.getpostman.com/view/9267/RztmsUpJ#fc0295f5-8473-46d7-a267-d1bd304a646d) for more).
+The IBHS Web services allow for the retrieval of all defined collections along with the retrieval of the key/values associated with each collection (view Postman [Collections](https://documenter.getpostman.com/view/9267/RztmsUpJ#fc0295f5-8473-46d7-a267-d1bd304a646d) for more).
 
 ### Understanding Questions
 Each evaluation contains a collection of answers to questions.  The list of all questions (for a given program type) can be retrieved via the web service, as well as a single questions (given a progam type and question Id).  The question have serveral characteristics that are important to note.
