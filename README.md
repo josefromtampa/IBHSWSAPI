@@ -1,5 +1,5 @@
 # IBHS Web Services API
-IBHS Web Services API for accessing various features of Focus.
+IBHS Web Services API for accessing various features of Focus.  Access to this service requires a security token only accessible with a valid User ID and password.
 
 ## IBHS Web Service API (Rest/JSON)
 IBHS Web Services API for accessing various features of Focus.  This web services represents a variety of Focus features, including:
