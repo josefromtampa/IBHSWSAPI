@@ -48,12 +48,16 @@ The web service has a CreateEvaluation operation that can be called with the app
   This operation does require a unique street/city/state along with Home Owner inforamtion.  
   In order for the evaluation to be seen by a specific evaluator, an evaluator Id must be used in the **request.application.EvaluatorId** field. If an invalid evaluator Id is used, the evaluation will be parked in a temporary area and can still be claimed by any evaluator -- but must have the Fortified Id in order to claim.  (The process of claiming in currently only available in the IBHS Focus application).
 
-This operation, when successful, will return the key identifier the evaluation -- the Fortified Id.  Please see Postman for examples.
+This operation, when successful, will return the key identifier the evaluation -- the Fortified Id.  
+
+See Postman [Create an Evaluation](https://documenter.getpostman.com/view/9267/RztmsUpJ#523391be-00fa-4787-aa7b-fb7e47252d5a) for examples.
 
 ### Updating an Evaluation
-The web service can perform an update to an evaluation.  Much like the CreateEvaluation, it uses the same data model, but includes a necessary FortifiedId field for identifing the evaluation.
+The web service can perform an update to an evaluation.  Much like the CreateEvaluation, it uses the same data model, but includes a necessary FortifiedId field for identifing the evaluation. ( 
 
 Not all sections need to be included in the update -- only section that have changed.  Any answer that is null or whose answer is 0 (and should be, like DesignationTypeId) will not be replaced.
+
+See Postman [Updating an Evaluation](https://documenter.getpostman.com/view/9267/RztmsUpJ#f132d3fa-eac6-479a-97e8-3b4e19cec4fb) for examples.
 
 ### Retrieving an Evaluation
 The web service can retrieve the information associated with a given FID and will tyically include additional data in the response:
@@ -122,11 +126,12 @@ Example:
   "SecurityTokenInvalidAfter": "2019-02-09T00:00:00"
 }
 ```
+See Postman [Updating an Evaluation](https://documenter.getpostman.com/view/9267/RztmsUpJ#794497f9-a594-4e81-a3fa-e218ec1a6323) for examples.
 
 ### Understanding Focus Collections
 
 The Focus system uses collections to define specific attributes such as HomeProgramType (Hurricane, High Wind), HomeCateogryType (New Home, Existing Home), DesignationTypes (Gold, Silver, Bronze), etc.  
-The IBHS Web services allow for the retrieval of all defined collections along with the retrieval of the key/values associated with each collection (view Postman Documention for more).
+The IBHS Web services allow for the retrieval of all defined collections along with the retrieval of the key/values associated with each collection (view [Postman Documention](https://documenter.getpostman.com/view/9267/RztmsUpJ#fc0295f5-8473-46d7-a267-d1bd304a646d) for more).
 
 ### Understanding Questions
 Each evaluation contains a collection of answers to questions.  The list of all questions (for a given program type) can be retrieved via the web service, as well as a single questions (given a progam type and question Id).  The question have serveral characteristics that are important to note.
