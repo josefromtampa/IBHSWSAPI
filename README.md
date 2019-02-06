@@ -336,14 +336,17 @@ To accomplish this, the Attachment structure contains an ImportUrl used for the 
 ```
   "AnswerAttachments": [
     {
-      "QuestionId": 97,
-      "Question": "If access is Partial or None, describe what restricts access? (Type n/a, if not applicable)",
-      "AnswerSequence": 1,
-      "AttachmentSequence": 2,
-      "AttachmentName": "",
-      "AttachmentComment": null,
-      "AttachmentImportUrl": "https://someserver.com/somedir/someimage.png",
-      "AttachmentUrl": "https://IBHSServer.com/ibhs_uploads/FEH336112019036CE51/images/"
+        "QuestionId": 97,
+        "Question": "If access is Partial or None, describe what restricts access? (Type n/a, if not applicable)",
+        "AnswerSequence": 1,
+        "AttachmentSequence": 2,
+        "AttachmentName": "",
+        "AttachmentNameUrl": "https://secure.fortifiedhome-ibhs.com/ibhs_uploads/FEH336112019036CE51/images/",
+        "AttachmentComment": null,
+        "ImportAttachmentUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Tin-roof.jpg",
+        "ImportAttachmentFailed": null,
+        "ImportAttachmentFailedCount": null,
+        "ImportAttachmentDateImported": null
     }
 ```
 Attachments require a Question Id, AnswerSequence and Attachment Sequence.  The AttachmentUrl is used for importing an image.
