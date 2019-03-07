@@ -52,6 +52,42 @@ This operation, when successful, will return the key identifier the evaluation -
 
 See Postman [Create an Evaluation](https://documenter.getpostman.com/view/9267/RztmsUpJ#523391be-00fa-4787-aa7b-fb7e47252d5a) for examples.
 
+About the ImportNotification:
+```
+ "importNotification" :{
+  	"webhook" : "",
+  	"securityToken": "",
+  	"userId" : "",
+  	"userPassword" : "" ,
+  	"ApprovalRequired": ""
+  }
+```
+* ApprovalRequired (Default=false).  If this is set to true, the evaluation will be placed in a "Sumitted For Approval" (status=22) status where the IBHS auditors will inspect and update with either "Submission Rejected" (status=23) for rejected evaluations or "In Progress" (status=8) for approved.  
+* Webhook: (ApprovalRequired must be true) When the status of the evalution moves from "Submitted for Approval" (status=22) to either "Submission Rejected" (status=23) or "In Progress" (status=8), the webhook will be called with the FortifiedId attached as a parameter. An example of this webhook (GET): http://Server/Site/Service.aspx will have the FID appended: http://Server/Site/Service.aspx?FID=FEH123123123123123.
+* securityToken: Not Used. future feature.
+* userId: Not Used. future feature.
+* userPassword: Not Used. future feature.
+
+If the webhook is called, a service can follow up with a call to GetEvaluationByFID to get the entire evaluation structure.  This structure contains "auditor_notes" used for documenting the reason for rejection:
+
+```
+{
+    "EvaluationId": 25634,
+    "FortifiedId": "FEH33611020180000089",
+    "HomeCategoryId": 1,
+     .
+     .
+     .
+     .
+     "AuditorNotes": "Inadequate Foundation.  These Foundations can not be Fortified.",
+     .
+     .
+     .
+    "Errors": [],
+    "SecurityTokenInvalidAfter": "2019-03-14T00:00:00"
+}
+```
+
 ### Updating an Evaluation
 The web service can perform an update to an evaluation.  Much like the CreateEvaluation, it uses the same data model, but includes a necessary FortifiedId field for identifing the evaluation. ( 
 
