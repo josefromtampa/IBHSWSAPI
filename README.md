@@ -374,11 +374,30 @@ To accomplish this, the Attachment structure contains an ImportUrl parameter in 
   "SecurityToken": "ajMyenM5ZVlLQWgxMFprcFd6bmZvR2xwc25IajdkUlZwbURYeGw1TDIxdkYxby9oYUFoREZybTYrOUtrYnBXdA==",
   "FortifiedId" : "FEH336112019036CE51",
   "AnswerAttachments" : [{
-    	"QuestionId": 250,
-    	"AnswerSequence" : 1,
-    	"AttachmentSequence" : 1,
-  	"ImportAttachmentUrl": "https://upload.wikimedia.org/wikipedia/commons/2/28/Faster_wear_of_asphalt_shingles_along_eaves.JPG"
-      }]
+    	 "QuestionId": 250,
+    	 "AnswerSequence" : 1,
+     	 "AttachmentSequence" : 1,
+  	   "ImportAttachmentUrl": "https://upload.wikimedia.org/wikipedia/commons/2/28/Faster_wear_of_asphalt_shingles_along_eaves.JPG"
+     },
+     {
+    	 "QuestionId": 250,
+  	   "AnswerSequence" : 1,
+  	   "AttachmentSequence" : 2,
+  	   "ImportAttachmentUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Tin-roof.jpg"
+      },
+      {
+	      "QuestionId": 250,
+  	    "AnswerSequence" : 1,
+  	    "AttachmentSequence" : 3,
+  	    "ImportAttachmentUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Tin-roof.jpg"
+  }]
+}
+      
+      
+      
+      
+      
+      ]
 }
 ```
 the ImportAttachmentURL is used for the web services to pull the resource into the IBHS system.  Once the system imports the URL, the attachment's name (AttachmentName) will be updated along with the other ImportAttachment fields:
