@@ -392,13 +392,6 @@ To accomplish this, the Attachment structure contains an ImportUrl parameter in 
   	    "ImportAttachmentUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Tin-roof.jpg"
   }]
 }
-      
-      
-      
-      
-      
-      ]
-}
 ```
 the ImportAttachmentURL is used for the web services to pull the resource into the IBHS system.  Once the system imports the URL, the attachment's name (AttachmentName) will be updated along with the other ImportAttachment fields:
 
