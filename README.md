@@ -367,7 +367,21 @@ Example:
 ### Understand Answer Attachments
 [This section is under design considerations and could change at any time]
 Much like Answers, attachments are associated to a Fortified Id and can be retrieved, upserted and deleted.  But, unlike Answers, Attachments require resources to be available within the IBHS system indpendently.
-To accomplish this, the Attachment structure contains an ImportUrl used for the web services to pull the resource into the IBHS system.  Once the system imports the URL, the attachment's name will be updated:
+To accomplish this, the Attachment structure contains an ImportUrl parameter in the call to upsertEvaluationAnswersAttachments
+
+```
+{
+  "SecurityToken": "ajMyenM5ZVlLQWgxMFprcFd6bmZvR2xwc25IajdkUlZwbURYeGw1TDIxdkYxby9oYUFoREZybTYrOUtrYnBXdA==",
+  "FortifiedId" : "FEH336112019036CE51",
+  "AnswerAttachments" : [{
+    	"QuestionId": 250,
+    	"AnswerSequence" : 1,
+    	"AttachmentSequence" : 1,
+  	"ImportAttachmentUrl": "https://upload.wikimedia.org/wikipedia/commons/2/28/Faster_wear_of_asphalt_shingles_along_eaves.JPG"
+      }]
+}
+```
+the ImportAttachmentURL is used for the web services to pull the resource into the IBHS system.  Once the system imports the URL, the attachment's name (AttachmentName) will be updated along with the other ImportAttachment fields:
 
 ```
   "AnswerAttachments": [
